@@ -37,7 +37,7 @@ hpx::shared_future<void> deep_copy_async(Kokkos::Experimental::SYCL &&instance,
       typename std::decay<SourceSpace>::type::data_type>::value);
   auto& q = *instance.impl_internal_space_instance()->m_queue;
   auto event = q.memcpy(t.data(), s.data(), t.size() * sizeof(typename std::decay<TargetSpace>::type::data_type));
-  return hpx::sycl::experimental::detail::get_future(event);
+  return hpx::sycl::experimental::detail::get_future(event, q);
 }
 #endif
 } // namespace kokkos
